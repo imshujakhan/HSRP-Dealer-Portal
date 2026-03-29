@@ -2,19 +2,24 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Actions.module.css";
 import { api } from "../services/api";
+import ConfirmModal from "../components/ConfirmModal";
 
 const Actions = () => {
   const navigate = useNavigate();
   const [orderId, setOrderId] = useState("");
   const [message, setMessage] = useState("");
   const [orderDetails, setOrderDetails] = useState(null);
+  const [modal, setModal] = useState(null);
+
+  const showConfirm = (message, onConfirm) => setModal({ message, onConfirm, type: "confirm" });
+  const showAlert = (message) => setModal({ message, type: "alert" });
+  const closeModal = () => setModal(null);
 
   const handleGetDetails = async () => {
     if (!orderId.trim()) {
       setMessage("Please enter a Vehicle Number");
       return;
     }
-
     setMessage("");
     const result = await api.getOrderById(orderId);
     if (result.success) {
@@ -31,20 +36,41 @@ const Actions = () => {
       return;
     }
 
-    // First get order details
     const orderResult = await api.getOrderById(orderId);
+
     if (!orderResult.success) {
-      setMessage("Order not found for this vehicle number");
+      setMessage("Order is not placed yet.");
+      setOrderDetails(null);
       return;
     }
 
-    // Check if order is in pending status
-    if (orderResult.data.orderStatus !== "pending") {
-      setMessage(`Cannot complete order. Current status: ${orderResult.data.orderStatus}. Order must be marked as received first.`);
+    const dealerId = localStorage.getItem("dealerId");
+    if (orderResult.data.dealerId !== dealerId) {
+      setMessage("This order does not belong to your dealership.");
+      setOrderDetails(null);
       return;
     }
 
-    if (window.confirm(`Complete order for vehicle ${orderId}?`)) {
+    const { orderStatus } = orderResult.data;
+
+    if (orderStatus === "completed") {
+      setMessage("Order is already completed.");
+      setOrderDetails(orderResult.data);
+      return;
+    }
+
+    if (orderStatus !== "pending") {
+      const statusLabels = {
+        receiving: "Pending for Receiving — plate not yet received by dealer.",
+        received: "Plate received by dealer — awaiting affixation processing.",
+      };
+      setMessage(`Cannot complete order. Current status: ${statusLabels[orderStatus] || orderStatus}`);
+      setOrderDetails(orderResult.data);
+      return;
+    }
+
+    showConfirm(`Complete order for vehicle ${orderId}?`, async () => {
+      closeModal();
       const result = await api.updateOrderStatus(orderId, "completed");
       if (result.success) {
         setMessage(`Order for vehicle ${orderId} completed successfully!`);
@@ -53,7 +79,7 @@ const Actions = () => {
       } else {
         setMessage(result.error || "Failed to complete order");
       }
-    }
+    });
   };
 
   const handleUpdateStatus = async (newStatus) => {
@@ -61,7 +87,6 @@ const Actions = () => {
       setMessage("Please enter a Vehicle Number");
       return;
     }
-
     const result = await api.updateOrderStatus(orderId, newStatus);
     if (result.success) {
       setMessage(`Order for vehicle ${orderId} marked as received!`);
@@ -73,6 +98,14 @@ const Actions = () => {
 
   return (
     <div className={styles.actionsContainer}>
+      {modal && (
+        <ConfirmModal
+          message={modal.message}
+          type={modal.type}
+          onConfirm={modal.onConfirm}
+          onCancel={closeModal}
+        />
+      )}
       <div className={styles.header}>
         <div className={styles.headerTitles}>
           <h1>Actions</h1>

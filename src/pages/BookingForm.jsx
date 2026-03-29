@@ -5,6 +5,21 @@ import { getMinDate, getMaxDate } from "../utils/helpers";
 import { api } from "../services/api";
 import styles from "./BookingForm.module.css";
 
+const LABELS = {
+  state: "State *",
+  vehicleNumber: "Vehicle Number *",
+  chassisNumber: "Chassis Number (Last 5 digits) *",
+  engineNumber: "Engine Number (Last 5 digits) *",
+  registrationDate: "Date of Registration *",
+  vehicleClass: "Vehicle Class *",
+  fullName: "Full Name *",
+  mobile: "Mobile Number *",
+  address: "Address *",
+  dealer: "Select Dealer *",
+  timeSlot: "Time Slot *",
+  appointmentDate: "Appointment Date *",
+};
+
 function BookingForm() {
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
@@ -56,9 +71,6 @@ function BookingForm() {
     setLoading(true);
 
     setTimeout(async () => {
-      console.log('Searching for:', verificationData);
-      console.log('Database:', vehicleDatabase);
-      
       // Check if vehicle number already has an order
       const checkResult = await api.getOrderById(verificationData.vehicleNumber);
       if (checkResult.success) {
@@ -69,19 +81,14 @@ function BookingForm() {
       
       const vehicle = vehicleDatabase.find(
         (v) => {
-          const match = v.state === verificationData.state &&
+          return v.state === verificationData.state &&
             v.vehicleNumber.toUpperCase().replace(/-/g, '') === verificationData.vehicleNumber.toUpperCase().replace(/-/g, '') &&
             v.chassisNumber === verificationData.chassisNumber &&
             v.engineNumber === verificationData.engineNumber &&
             v.registrationDate === verificationData.registrationDate &&
             v.vehicleClass === verificationData.vehicleClass;
-          
-          console.log('Checking vehicle:', v, 'Match:', match);
-          return match;
         }
       );
-
-      console.log('Found vehicle:', vehicle);
 
       if (vehicle) {
         setStep(2);
@@ -97,6 +104,9 @@ function BookingForm() {
     e.preventDefault();
     setStep(3);
   };
+
+  const handlePrint = () => window.print();
+  const handleBackToHome = () => navigate("/");
 
   const handleFinalSubmit = async (e) => {
     e.preventDefault();
@@ -166,7 +176,7 @@ function BookingForm() {
             <form onSubmit={handleVerify} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label>State *</label>
+                  <label>{LABELS.state}</label>
                   <select
                     name="state"
                     value={verificationData.state}
@@ -182,7 +192,7 @@ function BookingForm() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Vehicle Number *</label>
+                  <label>{LABELS.vehicleNumber}</label>
                   <input
                     type="text"
                     name="vehicleNumber"
@@ -196,7 +206,7 @@ function BookingForm() {
 
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label>Chassis Number (Last 5 digits) *</label>
+                  <label>{LABELS.chassisNumber}</label>
                   <input
                     type="text"
                     name="chassisNumber"
@@ -209,7 +219,7 @@ function BookingForm() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Engine Number (Last 5 digits) *</label>
+                  <label>{LABELS.engineNumber}</label>
                   <input
                     type="text"
                     name="engineNumber"
@@ -224,7 +234,7 @@ function BookingForm() {
 
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label>Date of Registration *</label>
+                  <label>{LABELS.registrationDate}</label>
                   <input
                     type="date"
                     name="registrationDate"
@@ -235,7 +245,7 @@ function BookingForm() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Vehicle Class *</label>
+                  <label>{LABELS.vehicleClass}</label>
                   <select
                     name="vehicleClass"
                     value={verificationData.vehicleClass}
@@ -260,7 +270,7 @@ function BookingForm() {
             <form onSubmit={handleContactSubmit} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label>Full Name *</label>
+                  <label>{LABELS.fullName}</label>
                   <input
                     type="text"
                     name="name"
@@ -272,7 +282,7 @@ function BookingForm() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Mobile Number *</label>
+                  <label>{LABELS.mobile}</label>
                   <input
                     type="tel"
                     name="mobile"
@@ -286,7 +296,7 @@ function BookingForm() {
               </div>
 
               <div className={styles.formGroup}>
-                <label>Address *</label>
+                <label>{LABELS.address}</label>
                 <textarea
                   name="address"
                   value={contactData.address}
@@ -307,7 +317,7 @@ function BookingForm() {
             <form onSubmit={handleFinalSubmit} className={styles.form}>
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label>Select Dealer *</label>
+                  <label>{LABELS.dealer}</label>
                   <select
                     name="dealer"
                     value={appointmentData.dealer}
@@ -324,7 +334,7 @@ function BookingForm() {
                 </div>
 
                 <div className={styles.formGroup}>
-                  <label>Time Slot *</label>
+                  <label>{LABELS.timeSlot}</label>
                   <select
                     name="slot"
                     value={appointmentData.slot}
@@ -342,7 +352,7 @@ function BookingForm() {
               </div>
 
               <div className={styles.formGroup}>
-                <label>Appointment Date *</label>
+                <label>{LABELS.appointmentDate}</label>
                 <input
                   type="date"
                   name="date"
@@ -400,10 +410,10 @@ function BookingForm() {
               </div>
 
               <div className={styles.actionButtons}>
-                <button onClick={() => window.print()} className={styles.printButton}>
+                <button onClick={handlePrint} className={styles.printButton}>
                   🖨️ Print Receipt
                 </button>
-                <button onClick={() => navigate("/")} className={styles.submitButton}>
+                <button onClick={handleBackToHome} className={styles.submitButton}>
                   Back to Home
                 </button>
               </div>

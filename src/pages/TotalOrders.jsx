@@ -8,6 +8,10 @@ import {
 import { useOrders } from "../hooks/useOrders";
 import styles from "./TotalOrders.module.css";
 
+const LABELS = {
+  search: "Search:",
+};
+
 const TotalOrders = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,7 +36,7 @@ const TotalOrders = () => {
       
       <div className={styles.filterSection}>
         <div className={styles.filterGroup}>
-          <label>Search:</label>
+          <label>{LABELS.search}</label>
           <input
             type="text"
             placeholder="Order ID, Name, or Mobile"

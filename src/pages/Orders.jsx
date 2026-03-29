@@ -2,6 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import styles from "./TotalOrders.module.css";
 import { api } from "../services/api";
+import ConfirmModal from "../components/ConfirmModal";
+
+const LABELS = {
+  search: "Search:",
+  fromDate: "From Date:",
+  toDate: "To Date:",
+};
 
 const Orders = () => {
   const navigate = useNavigate();
@@ -15,6 +22,11 @@ const Orders = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [isReceivingPage, setIsReceivingPage] = useState(false);
   const [selectedOrders, setSelectedOrders] = useState([]);
+  const [modal, setModal] = useState(null);
+
+  const showConfirm = (message, onConfirm) => setModal({ message, onConfirm, type: "confirm" });
+  const showAlert = (message) => setModal({ message, type: "alert" });
+  const closeModal = () => setModal(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -92,7 +104,7 @@ const Orders = () => {
       setFilteredOrders(filteredOrders.filter(o => o.orderId !== orderId));
       setSelectedOrders(selectedOrders.filter(id => id !== orderId));
     } else {
-      alert('Failed to update order');
+      showAlert('Failed to update order');
     }
   };
 
@@ -112,21 +124,21 @@ const Orders = () => {
     }
   };
 
-  const handleBulkMarkAsReceived = async () => {
+  const handleBulkMarkAsReceived = () => {
     if (selectedOrders.length === 0) {
-      alert('Please select orders to mark as received');
+      showAlert('Please select orders to mark as received');
       return;
     }
-    
-    if (window.confirm(`Mark ${selectedOrders.length} order(s) as received?`)) {
+    showConfirm(`Mark ${selectedOrders.length} order(s) as received?`, async () => {
+      closeModal();
       for (const orderId of selectedOrders) {
         await api.updateOrderStatus(orderId, 'pending');
       }
       setOrders(orders.filter(o => !selectedOrders.includes(o.orderId)));
       setFilteredOrders(filteredOrders.filter(o => !selectedOrders.includes(o.orderId)));
       setSelectedOrders([]);
-      alert('Orders marked as received!');
-    }
+      showAlert('Orders marked as received!');
+    });
   };
 
   const formatDate = (dateString) => {
@@ -172,6 +184,14 @@ const Orders = () => {
 
   return (
     <div className={styles.container}>
+      {modal && (
+        <ConfirmModal
+          message={modal.message}
+          type={modal.type}
+          onConfirm={modal.onConfirm}
+          onCancel={closeModal}
+        />
+      )}
       <div className={styles.header}>
         <h1>{title}</h1>
         <div className={styles.headerButtons}>
@@ -185,7 +205,7 @@ const Orders = () => {
       </div>
       <div className={styles.filterSection}>
         <div className={styles.filterGroup}>
-          <label>Search:</label>
+          <label>{LABELS.search}</label>
           <input
             type="text"
             placeholder="Order ID, Name, or Mobile"
@@ -195,7 +215,7 @@ const Orders = () => {
           />
         </div>
         <div className={styles.filterGroup}>
-          <label>From Date:</label>
+          <label>{LABELS.fromDate}</label>
           <input
             type="date"
             value={startDate}
@@ -204,7 +224,7 @@ const Orders = () => {
           />
         </div>
         <div className={styles.filterGroup}>
-          <label>To Date:</label>
+          <label>{LABELS.toDate}</label>
           <input
             type="date"
             value={endDate}

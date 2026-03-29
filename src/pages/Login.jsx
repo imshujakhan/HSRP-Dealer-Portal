@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { api } from "../services/api";
 import styles from "./Login.module.css";
 
+const LABELS = {
+  email: "Email Address",
+  password: "Password",
+};
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -16,7 +21,7 @@ function Login() {
     setLoading(true);
 
     const result = await api.login(email, password);
-    
+
     if (result.success) {
       localStorage.setItem("dealerId", result.data.dealerId);
       localStorage.setItem("dealerData", JSON.stringify(result.data));
@@ -33,7 +38,10 @@ function Login() {
         <div className={styles.content}>
           <h1 className={styles.mainTitle}>Welcome to</h1>
           <h2 className={styles.brandTitle}>HSRP BOOKING PORTAL</h2>
-          <p className={styles.description}>Manage HSRP number plate bookings efficiently with our comprehensive dealer management system</p>
+          <p className={styles.description}>
+            Manage HSRP number plate bookings efficiently with our comprehensive
+            dealer management system
+          </p>
           <div className={styles.features}>
             <div className={styles.feature}>✓ Real-time Booking Tracking</div>
             <div className={styles.feature}>✓ Complete Order Management</div>
@@ -46,12 +54,14 @@ function Login() {
         <div className={styles.loginBox}>
           <div className={styles.logoSection}>
             <h1 className={styles.logo}>Dealer Login</h1>
-            <p className={styles.subtitle}>Enter your credentials to continue</p>
+            <p className={styles.subtitle}>
+              Enter your credentials to continue
+            </p>
           </div>
 
           <form onSubmit={handleSubmit} className={styles.loginForm}>
             <div className={styles.formGroup}>
-              <label htmlFor="email">Email Address</label>
+              <label htmlFor="email">{LABELS.email}</label>
               <input
                 type="email"
                 id="email"
@@ -64,7 +74,7 @@ function Login() {
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">{LABELS.password}</label>
               <input
                 type="password"
                 id="password"
@@ -78,7 +88,11 @@ function Login() {
 
             {error && <div className={styles.error}>{error}</div>}
 
-            <button type="submit" className={styles.loginButton} disabled={loading}>
+            <button
+              type="submit"
+              className={styles.loginButton}
+              disabled={loading}
+            >
               {loading ? "Logging in..." : "Login"}
             </button>
           </form>

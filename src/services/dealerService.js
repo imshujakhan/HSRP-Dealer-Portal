@@ -15,7 +15,14 @@ export const dealerService = {
         saveToCache(cacheKey, dealers);
       }
       
-      const dealer = dealers.find(d => d.email === email && d.password === password);
+      const safeEqual = (a, b) => {
+        if (a.length !== b.length) return false;
+        let result = 0;
+        for (let i = 0; i < a.length; i++) result |= a.charCodeAt(i) ^ b.charCodeAt(i);
+        return result === 0;
+      };
+
+      const dealer = dealers.find(d => safeEqual(d.email, email) && safeEqual(d.password, password));
       if (dealer) {
         const { password: _, ...dealerData } = dealer;
         logInfo('Login successful', { dealerId: dealer.dealerId });

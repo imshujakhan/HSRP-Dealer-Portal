@@ -13,7 +13,7 @@ export const dashboardService = {
       
       const totalOrders = dealerOrders.length;
       const receivingOrders = dealerOrders.filter(o => o.orderStatus === 'receiving').length;
-      const ordersReceivedByDealer = dealerOrders.filter(o => o.orderStatus === 'received').length;
+      const ordersReceivedByDealer = dealerOrders.filter(o => ['received', 'pending', 'completed'].includes(o.orderStatus)).length;
       const pendingOrders = dealerOrders.filter(o => o.orderStatus === 'pending').length;
       const completedOrders = dealerOrders.filter(o => o.orderStatus === 'completed').length;
       const todayCompletedOrders = dealerOrders.filter(o => 
@@ -70,44 +70,40 @@ export const dashboardService = {
       
       const totalOrders = dealerOrders.length;
       const receivingOrders = dealerOrders.filter(o => o.orderStatus === 'receiving').length;
-      const ordersReceivedByDealer = dealerOrders.filter(o => o.orderStatus === 'received').length;
+      const ordersReceivedByDealer = dealerOrders.filter(o => ['received', 'pending', 'completed'].includes(o.orderStatus)).length;
       const pendingOrders = dealerOrders.filter(o => o.orderStatus === 'pending').length;
       const completedOrders = dealerOrders.filter(o => o.orderStatus === 'completed').length;
       const todayCompletedOrders = dealerOrders.filter(o => 
         o.orderStatus === 'completed' && 
         o.completedDate?.startsWith(today)
       ).length;
-      
-      const appointmentsByDate = {};
+
+      // Scheduled Appointments: next 4 upcoming dates with non-completed orders
+      const scheduledMap = {};
       dealerOrders.forEach(order => {
-        if (order.appointmentDate) {
-          appointmentsByDate[order.appointmentDate] = (appointmentsByDate[order.appointmentDate] || 0) + 1;
+        if (order.appointmentDate && order.orderStatus !== 'completed' && order.appointmentDate >= today) {
+          scheduledMap[order.appointmentDate] = (scheduledMap[order.appointmentDate] || 0) + 1;
         }
       });
+      const scheduledAppointments = Object.entries(scheduledMap)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .slice(0, 4)
+        .map(([date, orders]) => ({ date, orders }));
 
-      const scheduledAppointments = Object.entries(appointmentsByDate)
-        .map(([date, orders]) => ({ date, orders }))
-        .slice(0, 5);
-
-      const hsrpReceived = dealerOrders
-        .filter(o => o.orderStatus === 'received')
-        .reduce((acc, order) => {
-          const date = order.appointmentDate;
-          if (date) {
-            const existing = acc.find(item => item.date === date);
-            if (existing) {
-              existing.count++;
-            } else {
-              acc.push({ date, count: 1 });
-            }
-          }
-          return acc;
-        }, [])
-        .slice(0, 5);
+      // HSRP Received: same 4 dates, count only plates received by dealer
+      const scheduledDates = scheduledAppointments.map(s => s.date);
+      const hsrpReceivedMap = {};
+      dealerOrders.forEach(order => {
+        if (scheduledDates.includes(order.appointmentDate) && ['received', 'pending', 'completed'].includes(order.orderStatus)) {
+          hsrpReceivedMap[order.appointmentDate] = (hsrpReceivedMap[order.appointmentDate] || 0) + 1;
+        }
+      });
+      const hsrpReceived = scheduledDates.map(date => ({ date, count: hsrpReceivedMap[date] || 0 }));
 
       const quickStats = [
         { title: "Today's Completed Orders", count: todayCompletedOrders },
-        { title: "Today's Scheduled Appointments", count: appointmentsByDate[today] || 0 }
+        { title: "Today's Scheduled Appointments", count: scheduledMap[today] || 0 },
+        { title: "Pending for Affixation", count: pendingOrders }
       ];
 
       return {
@@ -116,9 +112,9 @@ export const dashboardService = {
           dealerProfile: dealerData,
           orderSummary: [
             { label: "Total Orders", count: totalOrders },
-            { label: "Pending to Receive", count: receivingOrders },
-            { label: "Pending Orders", count: pendingOrders },
-            { label: "Completed Till Date", count: completedOrders }
+            { label: "HSRP Received to Dealer", count: ordersReceivedByDealer },
+            { label: "Pending to Complete", count: pendingOrders },
+            { label: "Total Affixation Till Date", count: completedOrders }
           ],
           scheduledAppointments,
           hsrpReceived,

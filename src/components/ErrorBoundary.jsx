@@ -1,5 +1,9 @@
-import { Component } from 'react';
-import { logError } from '../utils/logger';
+import { Component } from "react";
+import { logError } from "../utils/logger";
+
+function handleReload() {
+  window.location.reload();
+}
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -12,16 +16,16 @@ class ErrorBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    logError('React Error Boundary caught error', error);
+    logError("React Error Boundary caught error", error);
   }
 
   render() {
     if (this.state.hasError) {
       return (
-        <div style={{ padding: '20px', textAlign: 'center' }}>
+        <div style={{ padding: "20px", textAlign: "center" }}>
           <h2>Something went wrong</h2>
           <p>{this.state.error?.message}</p>
-          <button onClick={() => window.location.reload()}>Reload Page</button>
+          <button onClick={handleReload}>Reload Page</button>
         </div>
       );
     }

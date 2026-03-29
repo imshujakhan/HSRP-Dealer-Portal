@@ -5,7 +5,7 @@ export const vehicleDatabase = [
     chassisNumber: "12345",
     engineNumber: "67890",
     registrationDate: "2020-05-15",
-    vehicleClass: "4w"
+    vehicleClass: "4w",
   },
   {
     state: "maharashtra",
@@ -13,7 +13,7 @@ export const vehicleDatabase = [
     chassisNumber: "23456",
     engineNumber: "78901",
     registrationDate: "2019-08-22",
-    vehicleClass: "2w"
+    vehicleClass: "2w",
   },
   {
     state: "delhi",
@@ -21,7 +21,7 @@ export const vehicleDatabase = [
     chassisNumber: "34567",
     engineNumber: "89012",
     registrationDate: "2021-03-10",
-    vehicleClass: "4w"
+    vehicleClass: "4w",
   },
   {
     state: "karnataka",
@@ -29,7 +29,7 @@ export const vehicleDatabase = [
     chassisNumber: "45678",
     engineNumber: "90123",
     registrationDate: "2018-11-05",
-    vehicleClass: "2w"
+    vehicleClass: "2w",
   },
   {
     state: "gujarat",
@@ -37,7 +37,7 @@ export const vehicleDatabase = [
     chassisNumber: "56789",
     engineNumber: "01234",
     registrationDate: "2022-01-20",
-    vehicleClass: "hgv"
+    vehicleClass: "hgv",
   },
   {
     state: "maharashtra",
@@ -45,7 +45,7 @@ export const vehicleDatabase = [
     chassisNumber: "67890",
     engineNumber: "12345",
     registrationDate: "2020-07-18",
-    vehicleClass: "hgv"
+    vehicleClass: "hgv",
   },
   {
     state: "delhi",
@@ -53,7 +53,7 @@ export const vehicleDatabase = [
     chassisNumber: "78901",
     engineNumber: "23456",
     registrationDate: "2019-12-25",
-    vehicleClass: "4w"
+    vehicleClass: "4w",
   },
   {
     state: "karnataka",
@@ -61,7 +61,7 @@ export const vehicleDatabase = [
     chassisNumber: "89012",
     engineNumber: "34567",
     registrationDate: "2021-09-30",
-    vehicleClass: "4w"
+    vehicleClass: "4w",
   },
   {
     state: "gujarat",
@@ -69,7 +69,7 @@ export const vehicleDatabase = [
     chassisNumber: "90123",
     engineNumber: "45678",
     registrationDate: "2020-02-14",
-    vehicleClass: "4w"
+    vehicleClass: "4w",
   },
   {
     state: "delhi",
@@ -77,8 +77,8 @@ export const vehicleDatabase = [
     chassisNumber: "01234",
     engineNumber: "56789",
     registrationDate: "2022-06-08",
-    vehicleClass: "2w"
-  }
+    vehicleClass: "2w",
+  },
 ];
 
 export const dealerDatabase = [
@@ -88,8 +88,7 @@ export const dealerDatabase = [
     location: "Mumbai",
     address: "Shop No. 12, Andheri East, Mumbai - 400069",
     contact: "9876543210",
-    email: "shuja@hsrp.com",
-    password: "admin1234"
+    email: import.meta.env.VITE_DEALER_D001_EMAIL,
   },
   {
     id: "D002",
@@ -97,13 +96,12 @@ export const dealerDatabase = [
     location: "Delhi",
     address: "Block A, Connaught Place, New Delhi - 110001",
     contact: "9876543211",
-    email: "khan@hsrp.com",
-    password: "admin1234"
-  }
+    email: import.meta.env.VITE_DEALER_D002_EMAIL,
+  },
 ];
 
 export const timeSlots = [
   "12:00 PM - 2:00 PM",
   "2:00 PM - 4:00 PM",
-  "4:00 PM - 6:00 PM"
+  "4:00 PM - 6:00 PM",
 ];

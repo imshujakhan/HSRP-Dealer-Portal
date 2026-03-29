@@ -44,7 +44,7 @@
 
 .totalOrder {
   background: #10b981;
-  width: 19%;
+  width: 24%;
   text-align: center;
   border: none;
 }
@@ -67,13 +67,13 @@
 
 .orderReceivedToDealer {
   background: #ffffff;
-  width: 19%;
+  width: 24%;
   text-align: center;
 }
 
 .pendingOrders {
   background: #fbbf24;
-  width: 19%;
+  width: 24%;
   text-align: center;
 }
 
@@ -84,7 +84,7 @@
 
 .completedTillDate {
   background: #ffffff;
-  width: 19%;
+  width: 24%;
   text-align: center;
 }
 
