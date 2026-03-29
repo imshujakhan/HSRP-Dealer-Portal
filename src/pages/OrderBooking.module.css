@@ -1,13 +1,11 @@
 .pageContainer {
   min-height: 100vh;
-  background: #f0fdf4;
   display: flex;
   flex-direction: column;
 }
 
 .header {
   background: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
   padding: 24px 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   position: sticky;
@@ -28,29 +26,32 @@
   margin: 0;
   font-size: 26px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #000000;
   letter-spacing: -0.5px;
 }
 
 .dealerLoginBtn {
-  background: #1a1a1a;
+  background: #2a6f97;
   color: #ffffff;
   border: none;
   padding: 12px 28px;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.3);
 }
 
 .dealerLoginBtn:hover {
-  background: #333333;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #2a9fc0;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.4);
 }
 
 .heroSection {
-  background: #10b981;
+  background: #2a6f97;
+
   padding: 120px 32px;
   text-align: center;
 }
@@ -71,7 +72,7 @@
 
 .heroSubtitle {
   font-size: 20px;
-  color: rgba(255, 255, 255, 0.9);
+  color: #ffffff;
   margin: 0 0 48px 0;
   font-weight: 400;
   line-height: 1.6;
@@ -85,29 +86,32 @@
 }
 
 .primaryBtn {
-  background: #fbbf24;
-  color: #1a1a1a;
-  border: none;
+  background: #ffffff;
+  color: #000000;
+  border: 1px solid rgb(168, 168, 168);
   padding: 16px 40px;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
 }
 
 .primaryBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.3);
+  background: #2a9fc0;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(83, 144, 217, 0.3);
 }
 
 .secondaryBtn {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.3);
   color: #ffffff;
-  border: 2px solid #ffffff;
+
+  border: none;
+
   padding: 16px 40px;
-  border-radius: 8px;
+
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
@@ -116,7 +120,8 @@
 }
 
 .secondaryBtn:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #f7d126;
+  color: #000000;
 }
 
 .featuresSection {
@@ -128,7 +133,7 @@
   text-align: center;
   font-size: 40px;
   font-weight: 700;
-  color: #1a1a1a;
+  color: #000000;
   margin: 0 0 64px 0;
   letter-spacing: -0.5px;
 }
@@ -144,17 +149,16 @@
 .featureCard {
   background: #f8f9fa;
   padding: 40px 32px;
-  border-radius: 16px;
-  border: 1px solid #e0e0e0;
+  border-radius: 0;
   text-align: center;
   transition: all 0.3s ease;
+  box-shadow: inset 0 0 0 1px #e0e0e0;
 }
 
 .featureCard:hover {
-  background: #fef3c7;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  background: #e0f7fc;
+  box-shadow: 0 8px 32px rgba(72, 191, 227, 0.2);
   transform: translateY(-4px);
-  border-color: #fbbf24;
 }
 
 .featureIcon {
@@ -164,14 +168,14 @@
 
 .featureCard h3 {
   font-size: 20px;
-  color: #1a1a1a;
+  color: #000000;
   margin: 0 0 16px 0;
   font-weight: 600;
 }
 
 .featureCard p {
   font-size: 15px;
-  color: #666666;
+  color: #000000;
   margin: 0;
   line-height: 1.7;
 }
@@ -179,7 +183,7 @@
 .trackSectionWrapper {
   background: #f8f9fa;
   padding: 96px 32px;
-  border-top: 1px solid #e0e0e0;
+  box-shadow: inset 0 1px 0 #e0e0e0;
 }
 
 .trackContainer {
@@ -190,7 +194,7 @@
 
 .trackTitle {
   font-size: 40px;
-  color: #1a1a1a;
+  color: #000000;
   margin: 0 0 16px 0;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -198,7 +202,7 @@
 
 .trackSubtitle {
   font-size: 17px;
-  color: #666666;
+  color: #000000;
   margin: 0 0 40px 0;
   line-height: 1.6;
 }
@@ -213,28 +217,30 @@
 
 .trackInput {
   padding: 16px 20px;
-  border: 1px solid #d0d0d0;
-  border-radius: 8px;
+  border: none;
+  border-radius: 0;
   font-size: 16px;
   flex: 1;
   min-width: 300px;
   outline: none;
   transition: all 0.3s ease;
   background: #ffffff;
-  color: #1a1a1a;
+  color: #000000;
+  box-shadow: inset 0 0 0 1px #d0d0d0;
 }
 
 .trackInput:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  box-shadow:
+    inset 0 0 0 1px #2a6f97,
+    0 0 0 1px #2a6f97;
 }
 
 .trackButton {
-  background: #fbbf24;
-  color: #1a1a1a;
+  background: #2a6f97;
+  color: #ffffff;
   border: none;
   padding: 16px 32px;
-  border-radius: 8px;
+  border-radius: 0;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -242,13 +248,13 @@
 }
 
 .trackButton:hover {
-  background: #f59e0b;
-  box-shadow: 0 4px 16px rgba(251, 191, 36, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 4px 16px rgba(72, 191, 227, 0.4);
 }
 
 .footer {
-  background: #1a1a1a;
-  color: #999999;
+  background: #2a6f97;
+  color: #ffffff;
   text-align: center;
   padding: 32px 20px;
   margin-top: auto;

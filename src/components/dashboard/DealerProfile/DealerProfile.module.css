@@ -2,21 +2,20 @@
   font-size: 18px;
   margin: 32px;
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 0;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  border: 1px solid #e0e0e0;
 }
 
 .dealerHeading {
+  color: #ffffff;
   display: flex;
   justify-content: center;
-  background: #10b981;
+  background: #2a6f97;
   padding: 28px;
 }
 
 .dealerHeading h1 {
-  color: #ffffff;
   font-size: 24px;
   font-weight: 600;
   margin: 0;
@@ -35,19 +34,19 @@
 
 .dealerTable th {
   font-weight: 600;
-  color: #666666;
+  color: #000000;
   text-align: left;
   padding: 16px;
   background-color: #f8f9fa;
-  border: 1px solid #e0e0e0;
+  box-shadow: inset 0 0 0 1px #e0e0e0;
   white-space: nowrap;
   font-size: 17px;
 }
 
 .dealerTable td {
-  color: #333333;
+  color: #000000;
   padding: 16px;
-  border: 1px solid #e0e0e0;
+  box-shadow: inset 0 0 0 1px #e0e0e0;
   font-size: 17px;
 }
 
@@ -80,8 +79,8 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
+    box-shadow: 0 0 0 1px #e0e0e0;
+    border-radius: 0;
     overflow: hidden;
   }
 

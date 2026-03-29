@@ -9,13 +9,12 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid #e0e0e0;
 }
 
 .navContainer h1 {
   font-size: 26px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: #000000;
   margin: 0;
   letter-spacing: -0.5px;
   cursor: pointer;
@@ -23,7 +22,7 @@
 }
 
 .navContainer h1:hover {
-  color: #10b981;
+  color: #48bfe3;
 }
 
 .navContainer img {
@@ -41,36 +40,36 @@
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 600;
-  background: #fbbf24;
-  color: #1a1a1a;
-  border: 2px solid #1a1a1a;
-  border-radius: 6px;
+  background: #48bfe3;
+  color: #000000;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.3);
 }
 
 .navBtn:hover {
-  background: #f59e0b;
-  box-shadow: 0 6px 16px rgba(251, 191, 36, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 6px 16px rgba(72, 191, 227, 0.4);
 }
 
 .logoutBtn {
   padding: 12px 28px;
   font-size: 15px;
   font-weight: 500;
-  background: #10b981;
+  background: #2a6f97;
   color: #ffffff;
-  border: 2px solid #1a1a1a;
-  border-radius: 8px;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.3);
 }
 
 .logoutBtn:hover {
-  background: #059669;
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 6px 16px rgba(72, 191, 227, 0.4);
 }
 
 @media (max-width: 768px) {

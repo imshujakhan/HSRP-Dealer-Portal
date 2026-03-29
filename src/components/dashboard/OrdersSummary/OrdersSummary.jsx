@@ -5,10 +5,22 @@ const OrdersSummary = ({ data }) => {
   if (!data) return null;
 
   const summaryItems = [
-    { ...data[0], className: styles.totalOrder, link: "/dashboard/orders/total" },
-    { ...data[1], className: styles.orderReceivedToDealer, link: "/dashboard/orders/received" },
-    { ...data[2], className: styles.pendingOrders, link: "/dashboard/orders/pending" },
-    { ...data[3], className: styles.completedTillDate, link: "/dashboard/orders/completed" },
+    {
+      ...data[0],
+      className: styles.totalOrder,
+      link: "/dashboard/orders/total",
+    },
+    { ...data[1], className: styles.orderReceivedToDealer },
+    {
+      ...data[2],
+      className: styles.pendingOrders,
+      link: "/dashboard/orders/pending",
+    },
+    {
+      ...data[3],
+      className: styles.completedTillDate,
+      link: "/dashboard/orders/completed",
+    },
   ];
 
   return (

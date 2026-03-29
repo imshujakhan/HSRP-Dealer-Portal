@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
   padding: 30px;
-  background: #f0fdf4;
+  background: #ffffff;
 }
 
 .noPrint {
@@ -15,59 +15,58 @@
   padding: 12px 24px;
   font-size: 16px;
   font-weight: 600;
-  border: 2px solid #1a1a1a;
-  border-radius: 6px;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(72, 191, 227, 0.4);
 }
 
 .printBtn {
-  background: #10b981;
-  color: #ffffff;
+  background: #48bfe3;
+  color: #000000;
 }
 
 .printBtn:hover {
-  background: #059669;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 6px 20px rgba(72, 191, 227, 0.5);
 }
 
 .backBtn {
-  background: #fbbf24;
-  color: #1a1a1a;
+  background: #48bfe3;
+  color: #000000;
 }
 
 .backBtn:hover {
-  background: #f59e0b;
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 6px 20px rgba(72, 191, 227, 0.5);
 }
 
 .receipt {
   background: #ffffff;
   padding: 40px;
-  border-radius: 12px;
+  border-radius: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border: 3px solid #1a1a1a;
   max-width: 800px;
   margin: 0 auto;
 }
 
 .header {
   text-align: center;
-  border-bottom: 3px solid #10b981;
+  box-shadow: inset 0 -3px 0 #48bfe3;
   padding-bottom: 20px;
   margin-bottom: 30px;
 }
 
 .header h1 {
   margin: 0 0 10px 0;
-  color: #10b981;
+  color: #48bfe3;
   font-size: 32px;
 }
 
 .orderId {
   font-size: 18px;
-  color: #1a1a1a;
+  color: #000000;
   font-weight: 600;
   margin: 0;
 }
@@ -77,10 +76,10 @@
 }
 
 .section h2 {
-  color: #10b981;
+  color: #48bfe3;
   font-size: 20px;
   margin: 0 0 15px 0;
-  border-bottom: 2px solid #fbbf24;
+  box-shadow: inset 0 -2px 0 #48bfe3;
   padding-bottom: 8px;
 }
 
@@ -88,7 +87,7 @@
   display: flex;
   justify-content: space-between;
   padding: 10px 0;
-  border-bottom: 1px solid #e5e7eb;
+  box-shadow: inset 0 -1px 0 #e5e7eb;
 }
 
 .row:last-child {
@@ -97,21 +96,21 @@
 
 .label {
   font-weight: 600;
-  color: #1a1a1a;
+  color: #000000;
   font-size: 16px;
 }
 
 .value {
-  color: #555;
+  color: #000000;
   font-size: 16px;
   text-align: right;
 }
 
 .status {
-  background: #fbbf24;
-  color: #1a1a1a;
+  background: #48bfe3;
+  color: #000000;
   padding: 4px 12px;
-  border-radius: 6px;
+  border-radius: 0;
   font-weight: 600;
 }
 
@@ -119,18 +118,18 @@
   text-align: center;
   margin-top: 40px;
   padding-top: 20px;
-  border-top: 3px solid #10b981;
+  box-shadow: inset 0 3px 0 #48bfe3;
 }
 
 .footer p {
   margin: 5px 0;
-  color: #555;
+  color: #000000;
   font-size: 14px;
 }
 
 .date {
   font-size: 12px;
-  color: #999;
+  color: #000000;
 }
 
 .loading,
@@ -140,7 +139,7 @@
   align-items: center;
   min-height: 50vh;
   font-size: 20px;
-  color: #666;
+  color: #000000;
 }
 
 /* Print Styles */
@@ -156,7 +155,6 @@
 
   .receipt {
     box-shadow: none;
-    border: 2px solid #000;
     page-break-inside: avoid;
   }
 

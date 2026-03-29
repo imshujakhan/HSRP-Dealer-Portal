@@ -1,7 +1,7 @@
 .container {
   min-height: 100vh;
   padding: 30px;
-  background: #f0fdf4;
+  background: #ffffff;
 }
 
 .header {
@@ -10,42 +10,40 @@
   align-items: center;
   margin-bottom: 30px;
   padding: 20px;
-  background: #10b981;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  border: 2px solid #1a1a1a;
+  background: var(--primary-color);
+  color: #ffffff;
+  border-radius: 0;
+  box-shadow: 0 8px 24px rgba(72, 191, 227, 0.3);
 }
 
 .header h1 {
   margin: 0;
   font-size: 26px;
-  color: #ffffff;
 }
 
 .header button {
   padding: 10px 24px;
   font-size: 16px;
   font-weight: 500;
-  background: #fbbf24;
-  color: #1a1a1a;
-  border: 2px solid #1a1a1a;
-  border-radius: 6px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(72, 191, 227, 0.4);
 }
 
 .header button:hover {
-  background: #f59e0b;
-  box-shadow: 0 6px 20px rgba(251, 191, 36, 0.3);
+  color: #ffffff;
+  background: #2a9fc0;
+  box-shadow: 0 6px 20px rgba(72, 191, 227, 0.5);
 }
 
 .tableContainer {
-  background: #fff;
-  border-radius: 12px;
+  border-radius: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   overflow: auto;
-  border: 3px solid #000;
   max-height: 70vh;
 }
 
@@ -56,7 +54,7 @@
 }
 
 .ordersTable thead {
-  background: #10b981;
+  background: var(--primary-color);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -67,27 +65,26 @@
   text-align: left;
   font-weight: 600;
   color: #ffffff;
-  border-bottom: 2px solid #000;
   font-size: 17px;
   white-space: nowrap;
 }
 
 .ordersTable td {
   padding: 12px 8px;
-  border-bottom: 1px solid #dee2e6;
-  color: #1a1a1a;
+  box-shadow: inset 0 -1px 0 #dee2e6;
+  color: #000000;
   font-size: 17px;
   font-weight: 500;
   white-space: nowrap;
 }
 
 .ordersTable tbody tr:hover {
-  background: #fef3c7;
+  background: #e0f7fc;
 }
 
 .statusBadge {
   padding: 8px 14px;
-  border-radius: 12px;
+  border-radius: 0;
   font-size: 16px;
   font-weight: 500;
   text-transform: capitalize;
@@ -95,18 +92,18 @@
 }
 
 .statusPending {
-  background: #fbbf24;
-  color: #1a1a1a;
+  background: var(--secondary-color);
+  color: #000000;
 }
 
 .statusReceiving {
-  background: #10b981;
+  background: var(--fourth-color);
   color: #ffffff;
 }
 
 .statusCompleted {
-  background: #000;
-  color: #fff;
+  background: var(--third-color);
+  color: #ffffff;
 }
 
 .loading {
@@ -115,16 +112,16 @@
   align-items: center;
   min-height: 50vh;
   font-size: 20px;
-  color: #666;
+  color: #000000;
 }
 
 .totalCount {
   padding: 20px;
   text-align: right;
   background-color: #f8f9fa;
-  border-top: 2px solid #dee2e6;
+  box-shadow: inset 0 2px 0 #dee2e6;
   font-size: 18px;
-  color: #333;
+  color: #000000;
 }
 
 .filterSection {
@@ -133,10 +130,9 @@
   align-items: center;
   padding: 20px;
   background: #fff;
-  border-radius: 12px;
+  border-radius: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   margin-bottom: 20px;
-  border: 3px solid #000;
 }
 
 .filterGroup {
@@ -148,35 +144,37 @@
 .filterGroup label {
   font-size: 14px;
   font-weight: 500;
-  color: #555;
+  color: #000000;
 }
 
 .dateInput {
   padding: 8px 12px;
   font-size: 16px;
-  border: 2px solid #dee2e6;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
+  border: none;
+  border-radius: 0;
+  transition: box-shadow 0.3s ease;
+  box-shadow: inset 0 0 0 2px #dee2e6;
 }
 
 .dateInput:focus {
   outline: none;
-  border-color: #1E90FF;
-  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+  box-shadow:
+    inset 0 0 0 2px #48bfe3,
+    0 0 0 3px rgba(72, 191, 227, 0.2);
 }
 
 .clearButton {
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
-  background: #000;
-  color: #FFD700;
-  border: 2px solid #000;
-  border-radius: 6px;
+  background: var(--primary-color);
+  color: #ffffff;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 20px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(72, 191, 227, 0.4);
 }
 
 .clearButton:hover {
@@ -187,16 +185,18 @@
 .searchInput {
   padding: 8px 12px;
   font-size: 16px;
-  border: 2px solid #dee2e6;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
+  border: none;
+  border-radius: 0;
+  transition: box-shadow 0.3s ease;
   min-width: 250px;
+  box-shadow: inset 0 0 0 2px #dee2e6;
 }
 
 .searchInput:focus {
   outline: none;
-  border-color: #1E90FF;
-  box-shadow: 0 0 0 3px rgba(30, 144, 255, 0.2);
+  box-shadow:
+    inset 0 0 0 2px #48bfe3,
+    0 0 0 3px rgba(72, 191, 227, 0.2);
 }
 
 .pagination {
@@ -210,66 +210,67 @@
 
 .pagination button {
   padding: 8px 16px;
-  background: #10b981;
+  background: var(--primary-color);
   color: #ffffff;
-  border: 2px solid #000;
-  border-radius: 6px;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   font-weight: 500;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.3);
   transition: all 0.3s ease;
 }
 
 .pagination button:hover:not(:disabled) {
-  background: #059669;
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 6px 16px rgba(72, 191, 227, 0.4);
 }
 
 .pagination span {
   font-weight: 500;
-  color: #333;
+  color: #000000;
 }
 
 .checkbox {
   width: 18px;
   height: 18px;
   cursor: pointer;
-  accent-color: #10b981;
+  accent-color: #48bfe3;
 }
 
 .printBtn {
-  background: #fbbf24;
-  border: 2px solid #1a1a1a;
+  background: #48bfe3;
+  color: #000000;
+  border: none;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 0;
   cursor: pointer;
   font-size: 16px;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(72, 191, 227, 0.3);
 }
 
 .printBtn:hover {
-  background: #f59e0b;
-  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.4);
 }
 
 .actionBtn {
-  background: #10b981;
+  background: var(--primary-color);
   color: #ffffff;
-  border: 2px solid #1a1a1a;
+  border: none;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 0;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 8px rgba(72, 191, 227, 0.3);
   white-space: nowrap;
 }
 
 .actionBtn:hover {
-  background: #059669;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 4px 12px rgba(72, 191, 227, 0.4);
 }
 
 .headerButtons {
@@ -282,18 +283,18 @@
   padding: 10px 24px;
   font-size: 16px;
   font-weight: 500;
-  background: #10b981;
-  color: #ffffff;
-  border: 2px solid #1a1a1a;
-  border-radius: 6px;
+  background: #48bfe3;
+  color: #000000;
+  border: none;
+  border-radius: 0;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(72, 191, 227, 0.4);
 }
 
 .bulkActionBtn:hover {
-  background: #059669;
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
+  background: #2a9fc0;
+  box-shadow: 0 6px 20px rgba(72, 191, 227, 0.5);
 }
 
 @media (max-width: 768px) {

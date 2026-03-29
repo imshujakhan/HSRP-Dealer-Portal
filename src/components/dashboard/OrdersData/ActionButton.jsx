@@ -6,11 +6,7 @@ const ActionButton = () => {
 
   return (
     <div className={styles.buttonContainer}>
-      <button 
-        type="button" 
-        className="btn btn-primary"
-        onClick={() => navigate("/dashboard/actions")}
-      >
+      <button type="button" onClick={() => navigate("/dashboard/actions")}>
         Actions/Reports
       </button>
     </div>

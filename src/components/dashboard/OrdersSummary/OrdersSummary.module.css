@@ -9,10 +9,8 @@
 }
 
 .orderHeading > div {
-  border-radius: 16px;
   padding: 32px 24px;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-  border: 1px solid #e0e0e0;
   transition: all 0.3s ease;
 }
 
@@ -25,65 +23,60 @@
   font-size: 56px;
   font-weight: 700;
   margin: 0 0 12px 0;
-  color: #1a1a1a;
+
   letter-spacing: -1px;
 }
 
 .orderHeading a {
   font-size: 16px;
-  text-decoration: none;
-  color: #667eea;
+  color: #ffffff;
   font-weight: 500;
   transition: color 0.3s ease;
-}
-
-.orderHeading a:hover {
-  color: #5568d3;
   text-decoration: underline;
 }
 
+.orderHeading a:hover {
+  color: #ffffff;
+}
+
 .totalOrder {
-  background: #10b981;
+  background: var(--primary-color);
   width: 24%;
   text-align: center;
   border: none;
-}
-
-.totalOrder h1,
-.totalOrder a {
   color: #ffffff;
 }
 
 .receivingOrders {
-  background: #fbbf24;
+  background: #48bfe3;
   width: 19%;
   text-align: center;
 }
 
 .receivingOrders h1,
 .receivingOrders a {
-  color: #1a1a1a;
+  color: #000000;
 }
 
 .orderReceivedToDealer {
-  background: #ffffff;
+  background: var(--fourth-color);
   width: 24%;
   text-align: center;
 }
 
 .pendingOrders {
-  background: #fbbf24;
+  background: var(--secondary-color);
   width: 24%;
   text-align: center;
 }
 
 .pendingOrders h1,
 .pendingOrders a {
-  color: #1a1a1a;
+  color: #000000;
 }
 
 .completedTillDate {
-  background: #ffffff;
+  background: var(--third-color);
   width: 24%;
   text-align: center;
 }
