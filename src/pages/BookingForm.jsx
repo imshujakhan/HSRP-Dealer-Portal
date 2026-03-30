@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { vehicleDatabase, dealerDatabase, timeSlots } from "../config/vehicleData";
+import {
+  vehicleDatabase,
+  dealerDatabase,
+  timeSlots,
+} from "../config/vehicleData";
 import { getMinDate, getMaxDate } from "../utils/helpers";
 import { api } from "../services/api";
 import styles from "./BookingForm.module.css";
+import { API_BASE } from "../services/config";
 
 const LABELS = {
   state: "State *",
@@ -47,15 +52,15 @@ function BookingForm() {
 
   const handleVerificationChange = (e) => {
     const { name, value } = e.target;
-    const updatedValue = name === 'vehicleNumber' ? value.toUpperCase() : value;
+    const updatedValue = name === "vehicleNumber" ? value.toUpperCase() : value;
     setVerificationData({ ...verificationData, [name]: updatedValue });
     setError("");
   };
 
   const handleContactChange = (e) => {
     const { name, value } = e.target;
-    if (name === 'mobile') {
-      const numericValue = value.replace(/\D/g, '').slice(0, 10);
+    if (name === "mobile") {
+      const numericValue = value.replace(/\D/g, "").slice(0, 10);
       setContactData({ ...contactData, [name]: numericValue });
     } else {
       setContactData({ ...contactData, [name]: value });
@@ -72,29 +77,36 @@ function BookingForm() {
 
     setTimeout(async () => {
       // Check if vehicle number already has an order
-      const checkResult = await api.getOrderById(verificationData.vehicleNumber);
+      const checkResult = await api.getOrderById(
+        verificationData.vehicleNumber,
+      );
       if (checkResult.success) {
-        setError(`This vehicle number (${verificationData.vehicleNumber}) already has an existing order. Duplicate bookings are not allowed.`);
+        setError(
+          `This vehicle number (${verificationData.vehicleNumber}) already has an existing order. Duplicate bookings are not allowed.`,
+        );
         setLoading(false);
         return;
       }
-      
-      const vehicle = vehicleDatabase.find(
-        (v) => {
-          return v.state === verificationData.state &&
-            v.vehicleNumber.toUpperCase().replace(/-/g, '') === verificationData.vehicleNumber.toUpperCase().replace(/-/g, '') &&
-            v.chassisNumber === verificationData.chassisNumber &&
-            v.engineNumber === verificationData.engineNumber &&
-            v.registrationDate === verificationData.registrationDate &&
-            v.vehicleClass === verificationData.vehicleClass;
-        }
-      );
+
+      const vehicle = vehicleDatabase.find((v) => {
+        return (
+          v.state === verificationData.state &&
+          v.vehicleNumber.toUpperCase().replace(/-/g, "") ===
+            verificationData.vehicleNumber.toUpperCase().replace(/-/g, "") &&
+          v.chassisNumber === verificationData.chassisNumber &&
+          v.engineNumber === verificationData.engineNumber &&
+          v.registrationDate === verificationData.registrationDate &&
+          v.vehicleClass === verificationData.vehicleClass
+        );
+      });
 
       if (vehicle) {
         setStep(2);
         setError("");
       } else {
-        setError("Vehicle details do not match our records. Please check and try again.");
+        setError(
+          "Vehicle details do not match our records. Please check and try again.",
+        );
       }
       setLoading(false);
     }, 1000);
@@ -113,8 +125,10 @@ function BookingForm() {
     setLoading(true);
 
     setTimeout(async () => {
-      const selectedDealer = dealerDatabase.find(d => d.id === appointmentData.dealer);
-      
+      const selectedDealer = dealerDatabase.find(
+        (d) => d.id === appointmentData.dealer,
+      );
+
       // Create order in database
       const orderData = {
         dealerId: appointmentData.dealer,
@@ -126,11 +140,11 @@ function BookingForm() {
         customerMobile: contactData.mobile,
         customerAddress: contactData.address,
         appointmentDate: appointmentData.date,
-        appointmentTime: appointmentData.slot
+        appointmentTime: appointmentData.slot,
       };
 
       const result = await api.createOrder(orderData);
-      
+
       if (result.success) {
         setBookingConfirmation({
           orderId: result.data.orderId,
@@ -260,7 +274,11 @@ function BookingForm() {
                 </div>
               </div>
 
-              <button type="submit" className={styles.submitButton} disabled={loading}>
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={loading}
+              >
                 {loading ? "Verifying..." : "Verify Vehicle"}
               </button>
             </form>
@@ -362,10 +380,16 @@ function BookingForm() {
                   max={getMaxDate()}
                   required
                 />
-                <small className={styles.hint}>Appointments available 5-14 days from today</small>
+                <small className={styles.hint}>
+                  Appointments available 5-14 days from today
+                </small>
               </div>
 
-              <button type="submit" className={styles.submitButton} disabled={loading}>
+              <button
+                type="submit"
+                className={styles.submitButton}
+                disabled={loading}
+              >
                 {loading ? "Confirming..." : "Confirm Booking"}
               </button>
             </form>
@@ -375,37 +399,53 @@ function BookingForm() {
             <div className={styles.confirmation}>
               <div className={styles.successIcon}>✓</div>
               <h2>Booking Confirmed!</h2>
-              <p className={styles.confirmSubtitle}>Your HSRP booking has been successfully completed</p>
+              <p className={styles.confirmSubtitle}>
+                Your HSRP booking has been successfully completed
+              </p>
 
               <div className={styles.confirmDetails}>
                 <div className={styles.detailItem}>
                   <span className={styles.detailLabel}>Order ID:</span>
-                  <span className={styles.detailValue}>{bookingConfirmation.orderId}</span>
+                  <span className={styles.detailValue}>
+                    {bookingConfirmation.orderId}
+                  </span>
                 </div>
 
                 <div className={styles.detailItem}>
                   <span className={styles.detailLabel}>Dealer Name:</span>
-                  <span className={styles.detailValue}>{bookingConfirmation.dealer.name}</span>
+                  <span className={styles.detailValue}>
+                    {bookingConfirmation.dealer.name}
+                  </span>
                 </div>
 
                 <div className={styles.detailItem}>
                   <span className={styles.detailLabel}>Dealer Address:</span>
-                  <span className={styles.detailValue}>{bookingConfirmation.dealer.address}</span>
+                  <span className={styles.detailValue}>
+                    {bookingConfirmation.dealer.address}
+                  </span>
                 </div>
 
                 <div className={styles.detailItem}>
                   <span className={styles.detailLabel}>Dealer Contact:</span>
-                  <span className={styles.detailValue}>{bookingConfirmation.dealer.contact}</span>
+                  <span className={styles.detailValue}>
+                    {bookingConfirmation.dealer.contact}
+                  </span>
                 </div>
 
                 <div className={styles.detailItem}>
                   <span className={styles.detailLabel}>Appointment Date:</span>
-                  <span className={styles.detailValue}>{new Date(bookingConfirmation.date).toLocaleDateString('en-IN')}</span>
+                  <span className={styles.detailValue}>
+                    {new Date(bookingConfirmation.date).toLocaleDateString(
+                      "en-IN",
+                    )}
+                  </span>
                 </div>
 
                 <div className={styles.detailItem}>
                   <span className={styles.detailLabel}>Time Slot:</span>
-                  <span className={styles.detailValue}>{bookingConfirmation.slot}</span>
+                  <span className={styles.detailValue}>
+                    {bookingConfirmation.slot}
+                  </span>
                 </div>
               </div>
 
@@ -413,7 +453,10 @@ function BookingForm() {
                 <button onClick={handlePrint} className={styles.printButton}>
                   🖨️ Print Receipt
                 </button>
-                <button onClick={handleBackToHome} className={styles.submitButton}>
+                <button
+                  onClick={handleBackToHome}
+                  className={styles.submitButton}
+                >
                   Back to Home
                 </button>
               </div>
@@ -423,33 +466,41 @@ function BookingForm() {
 
         <div className={styles.stepIndicator}>
           <h3>Booking Progress</h3>
-          
-          <div className={`${styles.stepItem} ${step > 1 ? styles.completed : ''} ${step === 1 ? styles.active : ''}`}>
-            <div className={styles.stepNumber}>{step > 1 ? '✓' : '1'}</div>
+
+          <div
+            className={`${styles.stepItem} ${step > 1 ? styles.completed : ""} ${step === 1 ? styles.active : ""}`}
+          >
+            <div className={styles.stepNumber}>{step > 1 ? "✓" : "1"}</div>
             <div className={styles.stepContent}>
               <h4>Vehicle Verification</h4>
               <p>Verify your vehicle details</p>
             </div>
           </div>
 
-          <div className={`${styles.stepItem} ${step > 2 ? styles.completed : ''} ${step === 2 ? styles.active : ''}`}>
-            <div className={styles.stepNumber}>{step > 2 ? '✓' : '2'}</div>
+          <div
+            className={`${styles.stepItem} ${step > 2 ? styles.completed : ""} ${step === 2 ? styles.active : ""}`}
+          >
+            <div className={styles.stepNumber}>{step > 2 ? "✓" : "2"}</div>
             <div className={styles.stepContent}>
               <h4>Contact Information</h4>
               <p>Provide your contact details</p>
             </div>
           </div>
 
-          <div className={`${styles.stepItem} ${step > 3 ? styles.completed : ''} ${step === 3 ? styles.active : ''}`}>
-            <div className={styles.stepNumber}>{step > 3 ? '✓' : '3'}</div>
+          <div
+            className={`${styles.stepItem} ${step > 3 ? styles.completed : ""} ${step === 3 ? styles.active : ""}`}
+          >
+            <div className={styles.stepNumber}>{step > 3 ? "✓" : "3"}</div>
             <div className={styles.stepContent}>
               <h4>Appointment</h4>
               <p>Select dealer and time slot</p>
             </div>
           </div>
 
-          <div className={`${styles.stepItem} ${step === 4 ? styles.completed : ''}`}>
-            <div className={styles.stepNumber}>{step === 4 ? '✓' : '4'}</div>
+          <div
+            className={`${styles.stepItem} ${step === 4 ? styles.completed : ""}`}
+          >
+            <div className={styles.stepNumber}>{step === 4 ? "✓" : "4"}</div>
             <div className={styles.stepContent}>
               <h4>Confirmation</h4>
               <p>Booking completed</p>
