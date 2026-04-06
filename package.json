@@ -1,10 +1,10 @@
 {
-  "name": "saas-dashboard",
+  "name": "hsrp-dealer-portal",
   "private": true,
   "version": "1.0.0",
   "type": "module",
   "author": "Shuja",
-  "description": "HSRP Dealer Dashboard",
+  "description": "HSRP Dealer Portal",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
